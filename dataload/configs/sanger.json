@@ -4,7 +4,7 @@
         "id": "WMBO",
         "preferredPrefix": "WMBO",
         "title": "Whole Mouse Brain Ontology",
-        "uri": "https://github.com/Cellular-Semantics/whole_mouse_brain_ontology/blob/iteration_3/wmbo-base.owl",
+        "uri": "https://github.com/Cellular-Semantics/whole_mouse_brain_ontology/raw/refs/heads/iteration_3/wmbo-base.owl",
         "description": "A data-driven cell-type ontology of the whole mouse brain.",
         "homepage": "https://github.com/Cellular-Semantics/whole_mouse_brain_ontology",
         "definition_property": [
@@ -22,7 +22,7 @@
         ],
         "reasoner": "OWL2",
         "oboSlims": false,
-        "ontology_purl": "https://github.com/Cellular-Semantics/whole_mouse_brain_ontology/blob/iteration_3/wmbo.owl"
+        "ontology_purl": "https://github.com/Cellular-Semantics/whole_mouse_brain_ontology/raw/refs/heads/iteration_3/wmbo-base.owl"
       },
       {
         "id": "dhba",
