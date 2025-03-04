@@ -28,8 +28,8 @@ services:
     ols4-neo4j:
       image: neo4j:4.4.9-community
       ports:
-        - 7474:7474
-        - 7687:7687
+        - 7494:7474
+        - 7697:7687
       volumes:
         - ols4-neo4j-data:/var/lib/neo4j/data
       environment:
