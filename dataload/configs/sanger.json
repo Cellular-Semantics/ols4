@@ -15,7 +15,8 @@
         ],
         "hierarchical_property": [
           "http://purl.obolibrary.org/obo/BFO_0000050",
-          "http://purl.obolibrary.org/obo/RO_0002202"
+          "http://purl.obolibrary.org/obo/RO_0002202",
+          "http://purl.obolibrary.org/obo/RO_0015003"
         ],
         "base_uri": [
           "http://purl.obolibrary.org/obo/PCL_"
