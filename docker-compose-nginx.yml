@@ -1,0 +1,114 @@
+version: '3'
+services:
+    ols4-dataload:
+      environment:
+        - JAVA_OPTS=${JAVA_OPTS}
+      build:
+        context: .
+        dockerfile: ./dataload/Dockerfile
+      volumes:
+        - ols4-solr-data:/opt/solr/server/solr:rw
+        - ols4-neo4j-data:/opt/neo4j/data:rw
+        - ./${OLS4_CONFIG:?OLS4 dataload requires a config file}:/mnt/config.json:ro
+        - ./testcases:/opt/ols/dataload/testcases:ro
+          #- ./docker_out:/tmp/out:rw
+      command: ./dataload.dockersh ${OLS4_DATALOAD_ARGS:-}
+      networks:
+        - ols_network
+
+    ols4-solr:
+      image: solr:9.0.0
+      environment:
+        - SOLR_HOME=/mnt/ols4-solr-data
+      ports:
+        - 8983:8983
+      volumes:
+        - ols4-solr-data:/mnt/ols4-solr-data
+      command: ["-f"]
+      depends_on:
+        ols4-dataload:
+          condition: service_completed_successfully
+      networks:
+        - ols_network
+      
+    ols4-neo4j:
+      image: neo4j:4.4.9-community
+      ports:
+        - 7494:7474
+        - 7697:7687
+      volumes:
+        - ols4-neo4j-data:/var/lib/neo4j/data
+      environment:
+        - NEO4J_AUTH=none
+      depends_on:
+        ols4-dataload:
+          condition: service_completed_successfully
+      networks:
+        - ols_network
+
+    ols4-backend:
+      build:
+        context: .
+        dockerfile: ./backend/Dockerfile
+      ports:
+        - 8082:8080
+      environment:
+        - OLS_SOLR_HOST=http://ols4-solr:8983
+        - OLS_NEO4J_HOST=bolt://ols4-neo4j:7687
+      depends_on:
+        - ols4-solr
+        - ols4-neo4j    
+      links:
+        - ols4-solr
+        - ols4-neo4j 
+      networks:
+        - ols_network
+
+    ols4-frontend:
+      build:
+        context: ./frontend
+      env_file: ./frontend/.env
+      ports:
+        - 8085:8080
+      depends_on:
+        - ols4-backend
+      links:
+        - ols4-backend
+      networks:
+        - ols_network
+
+    run-api-tests:
+      profiles: ["run-api-tests"]
+      build: ./apitester4
+      volumes:
+        - ${OLS4_APITEST_OUTDIR:-./to_be_filled_by_script_outdir}:/mnt/out:rw
+        - ${OLS4_APITEST_COMPAREDIR:-./to_be_filled_by_script_comparedir}:/mnt/compare:rw
+      command: ["bash", "-c", "chown -R apitester:apitester /mnt && su -c \"java -jar /opt/apitester/target/apitester-1.0-SNAPSHOT-jar-with-dependencies.jar --url http://ols4-backend:8080 --outDir /mnt/out --compareDir /mnt/compare --deep > /mnt/out/apitester4.log\" apitester"]
+      depends_on:
+        - ols4-backend
+      links:
+        - ols4-backend
+      networks:
+        - ols_network
+
+    nginx:
+      image: nginx:latest
+      container_name: tdt_nginx
+      ports:
+        - "80:80"
+        - "443:443"
+      volumes:
+        - ./nginx.conf:/etc/nginx/conf.d/default.conf
+        - /Users/hk9//nginx-selfsigned:/etc/nginx/ssl
+      depends_on:
+        - ols4-frontend
+      networks:
+        - ols_network
+volumes:
+    ols4-neo4j-data:
+    ols4-solr-data:
+
+networks:
+  ols_network:
+    driver: bridge
+    external: false
