@@ -37,7 +37,7 @@ export default function EntityAnnotationsSection({
 
           return (
             <div key={title.toString().toUpperCase() + randomString()}>
-              <div className="font-bold">{title}</div>
+              <div className="font-bold mahmut">{title}</div>
               {annotations.length === 1 ? (
                 <p>
                   {renderAnnotation(annotations[0])}
