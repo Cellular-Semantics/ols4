@@ -95,6 +95,15 @@ export default function EntityAnnotationsSection({
        // Allows overriding the label of a link with an rdfs:label annotation
        // on the link annotation.
        //
+       if ((value.value as string).indexOf('://') !== -1) {
+        let metadata = value.getMetadata();
+        if(metadata) {
+          let linkLabel = metadata["http://www.w3.org/2000/01/rdf-schema#label"];
+          if(linkLabel) {
+            return <Link className="link-default" href={value.value}>{linkLabel}</Link>
+          }
+        }
+      }
        if (typeof(value.value) === 'string' && value.value.indexOf('://') !== -1) {
         let metadata = value.getMetadata();
         if(metadata) {
