@@ -184,7 +184,7 @@ export default function IndividualPropertyAssertionsSection({
 
   return (
     <div>
-      <div className="font-bold">Property assertions</div>
+      <div className="font-bold">Property assertions :|</div>
       {propertyAssertions.length === 1 ? (
         <p>{propertyAssertions[0]}</p>
       ) : (
