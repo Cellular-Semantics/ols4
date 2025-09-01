@@ -6,6 +6,12 @@ JAVA_OPTS="-Xms5G -Xmx25G"  docker compose up
 
 http://172.27.20.150:8081/ontologies
 
+## Restart server
+
+JAVA_OPTS="-Xms5G -Xmx25G"  docker compose down -v
+
+JAVA_OPTS="-Xms5G -Xmx25G"  docker compose up
+
 
 ## Configure
 
