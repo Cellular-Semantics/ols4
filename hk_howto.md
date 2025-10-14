@@ -1,16 +1,38 @@
+# Connect Server
+
+Connect to the VPN.
+
+```
+cd ../ssh_keys
+ssh -i id_ed25519 ubuntu@172.27.20.15
+```
+
+Navigate to OLS folder in the server
+
+```
+cd OLS/ols4/
+```
+
+## Restart server
+
+This operation will delete the existing data and re-read from scratch.
+
+export OLS4_CONFIG=./dataload/configs/sanger.json
+
+JAVA_OPTS="-Xms5G -Xmx25G"  docker compose down -v
+
+JAVA_OPTS="-Xms5G -Xmx25G"  docker compose up
+
+
 # Run OLS on Server
+
+Run:
 
 export OLS4_CONFIG=./dataload/configs/sanger.json
 
 JAVA_OPTS="-Xms5G -Xmx25G"  docker compose up
 
 http://172.27.20.150:8081/ontologies
-
-## Restart server
-
-JAVA_OPTS="-Xms5G -Xmx25G"  docker compose down -v
-
-JAVA_OPTS="-Xms5G -Xmx25G"  docker compose up
 
 
 ## Configure
