@@ -3,8 +3,8 @@
 Connect to the VPN.
 
 ```
-cd ../ssh_keys
-ssh -i id_ed25519 ubuntu@172.27.20.15
+cd ...../ssh_keys
+ssh -i id_ed25519 ubuntu@172.27.20.150
 ```
 
 Navigate to OLS folder in the server
