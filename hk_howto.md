@@ -13,7 +13,7 @@ Navigate to OLS folder in the server
 cd OLS/ols4/
 ```
 
-## Restart server
+# Restart server
 
 This operation will delete the existing data and re-read from scratch.
 
