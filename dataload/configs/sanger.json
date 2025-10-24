@@ -23,7 +23,7 @@
         ],
         "reasoner": "OWL2",
         "oboSlims": false,
-        "ontology_purl": "https://github.com/Cellular-Semantics/whole_mouse_brain_ontology/releases/latest/download/wmbo.owl"
+        "ontology_purl": "https://github.com/Cellular-Semantics/whole_mouse_brain_ontology/releases/download/v2025-04-25/wmbo.owl"
       },
       {
         "id": "cl",
