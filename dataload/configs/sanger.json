@@ -51,9 +51,9 @@
       {
         "id": "BGO",
         "preferredPrefix": "BGO",
-        "title": "Draft Basal Ganglia Consensus Ontology",
+        "title": "Basal Ganglia Consensus Ontology",
         "uri": "https://raw.githubusercontent.com/Cellular-Semantics/hmba_basal_ganglia_ontology/refs/heads/main/bgo.owl",
-        "description": "DRAFT - A data-driven cell-type ontology of the basal ganglia.",
+        "description": "This ontology consists of terms generated from the HMBA basal ganglion taxonomy and reference data. The majority of terms including all group level terms have Cell Ontology IDs and are directly integrated into the Cell Ontology https://www.ebi.ac.uk/ols4/ontologies/cl.",
         "homepage": "https://github.com/Cellular-Semantics/hmba_basal_ganglia_ontology",
         "definition_property": [
           "http://purl.obolibrary.org/obo/IAO_0000115"
